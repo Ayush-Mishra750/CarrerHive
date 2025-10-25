@@ -9,7 +9,7 @@ import { Badge } from "../badge";
 import { formatRelativeTime } from "@/app/utils/formatRelativeTime";
 
 
-interface iAppProps {
+interface AppProps {
   job: {
     id: string;
     jobTitle: string;
@@ -27,7 +27,7 @@ interface iAppProps {
   };
 }
 
-export function JobCard({ job }: iAppProps) {
+export function JobCard({ job }: AppProps) {
   return (
     <Link href={`/job/${job.id}`}>
       <Card className="hover:shadow-lg transition-all duration-300 hover:border-primary relative">
@@ -61,7 +61,7 @@ export function JobCard({ job }: iAppProps) {
                 <span className="hidden md:inline text-muted-foreground">
                   •
                 </span>
-                <Badge className="rounded-full">{job.location}</Badge>
+                <Badge className="rounded-full text-white">{job.location}</Badge>
                 <span className="hidden md:inline text-muted-foreground">
                   •
                 </span>
@@ -79,9 +79,11 @@ export function JobCard({ job }: iAppProps) {
                   {job.location}
                 </h1>
               </div>
-              <p className="text-sm text-muted-foreground md:text-right">
+                <Badge className="rounded-full text-white">   
                 {formatRelativeTime(job.createdAt)}
-              </p>
+              </Badge>
+
+           
             </div>
           </div>
           <div className="!mt-5">

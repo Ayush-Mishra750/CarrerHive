@@ -21,8 +21,6 @@ import { auth } from "@/app/utils/auth";
 
 export async function Navbar() {
   const session = await auth();
-
-
   return (
     <nav className="flex justify-between items-center py-5">
       <Link href="/" className="flex items-center gap-2">

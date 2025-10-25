@@ -177,8 +177,8 @@ export function CreateJobForm({
                 <FormControl>
                   <SalaryRangeSelector
                     control={form.control}
-                    minSalary={30000}
-                    maxSalary={1000000}
+                    minSalary={0}
+                    maxSalary={10000000}
                   />
                 </FormControl>
                 <FormMessage>

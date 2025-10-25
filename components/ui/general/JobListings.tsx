@@ -1,7 +1,5 @@
 import { prisma } from "@/app/utils/db";
-// import { EmptyState } from "./EmptyState";
-// import { PaginationComponent } from "./PaginationComponent";
-// import { JobCard } from "./JobCard";
+
 import { JobPostStatus } from "@prisma/client";
 import { JobCard } from "./jobCards";
 import { EmptyState } from "./EmptyState";
