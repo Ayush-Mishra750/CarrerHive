@@ -20,14 +20,14 @@ export function EmptyState({
       <div className="flex size-20 items-center justify-center rounded-full bg-primary/10">
         <Ban className="size-10 text-primary" />
       </div>
-      <h2 className="mt-6 text-xl font-semibold">{title}</h2>
+      <h2 className="mt-6 text-xl font-semibold ">{title}</h2>
       <p className="mb-8 mt-2 text-center text-sm leading-tight text-muted-foreground max-w-sm mx-auto">
         {description}
       </p>
 
       <Button asChild>
         <Link href={href}>
-          <PlusCircle className="size-4" /> {buttonText}
+          <PlusCircle className="size-4 text-white" /> <span className="text-white">{buttonText}</span>
         </Link>
       </Button>
     </div>

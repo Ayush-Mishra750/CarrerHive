@@ -1,15 +1,16 @@
-"use server"
+"use server";
 
 import z from "zod";
 import { companySchema, jobSchema, jobSeekerSchema } from "./utils/zodSchema";
 import { prisma } from "./utils/db";
 import { redirect } from "next/navigation";
 import { requireUser } from "./utils/hooks";
-import arcjet, { detectBot, shield } from "./utils/arcject"
+import arcjet, { detectBot, shield } from "./utils/arcject";
 import { request } from "@arcjet/next";
 import { stripe } from "./utils/stripe";
 import { jobListingDurationPricing } from "./utils/pricingTiers";
 import { inngest } from "./utils/inngest/client";
+import { revalidatePath } from "next/cache";
 
 
 const aj = arcjet
@@ -25,45 +26,40 @@ const aj = arcjet
     })
   );
 
-
-export async function  createCompany(data:z.infer<typeof companySchema>){
-  const session=await requireUser();
-  const req=await request();
-  const decision=await aj.protect(req);
-  if(decision.isDenied()){
+export async function createCompany(data: z.infer<typeof companySchema>) {
+  const session = await requireUser();
+  const req = await request();
+  const decision = await aj.protect(req);
+  if (decision.isDenied()) {
     throw new Error("Request denied by security policy");
   }
-      const user = await requireUser();
-    const validatedData=companySchema.parse(data);
-console.log("validate",validatedData)
+  const user = await requireUser();
+  const validatedData = companySchema.parse(data);
+  console.log("validate", validatedData);
 
-
- await prisma.user.update({
-  where: { id: user.id },
-  data: {
-    onboardingCompleted:true,
-    userType: "COMPANY",
-    Company: {
-      create: {
-        ...validatedData,
+  await prisma.user.update({
+    where: { id: user.id },
+    data: {
+      onboardingCompleted: true,
+      userType: "COMPANY",
+      Company: {
+        create: {
+          ...validatedData,
+        },
       },
     },
-  },
-});
-
-
+  });
 
   return redirect("/");
-    }
-
-
-    export async function createJobSeeker(data: z.infer<typeof jobSeekerSchema>) {
-  const user = await requireUser();
-const req=await request();
-const decision=await aj.protect(req);
-if(decision.isDenied()){
-throw new Error("Request denied by security policy");
 }
+
+export async function createJobSeeker(data: z.infer<typeof jobSeekerSchema>) {
+  const user = await requireUser();
+  const req = await request();
+  const decision = await aj.protect(req);
+  if (decision.isDenied()) {
+    throw new Error("Request denied by security policy");
+  }
   const validatedData = jobSeekerSchema.parse(data);
 
   await prisma.user.update({
@@ -183,4 +179,47 @@ export async function createJob(data: z.infer<typeof jobSchema>) {
   });
 
   return redirect(session.url as string);
+}
+
+export async function savedJobPost(jobId: string) {
+
+  const user = await requireUser();
+
+  const req = await request();
+  const decision = await aj.protect(req);
+
+  if (decision.isDenied()) {
+    throw new Error("User not authenticated");
+  }
+   const data=await prisma.savedJobPost.create({
+    data: {
+      jobId: jobId,
+      userId: user.id as string,
+    },
+  });
+  revalidatePath(`/job/${data.jobId}`);
+   
+}
+
+export async function unSavedJobPost(savedJobPostId:string){
+   const user = await requireUser();
+
+  const req = await request();
+  const decision = await aj.protect(req);
+
+  if (decision.isDenied()) {
+    throw new Error("User not authenticated");
+  }
+  const data=await prisma.savedJobPost.delete({
+    where:{
+      id:savedJobPostId,
+      userId:user?.id ,
+    },
+    select:{
+      jobId:true
+    }
+  })
+
+  revalidatePath(`/job/${data.jobId}`);
+  
 }

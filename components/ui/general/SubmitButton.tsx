@@ -6,6 +6,7 @@ import { Heart, Loader2 } from "lucide-react";
 import { Button } from "../button";
 
 
+
 export function GeneralSubmitButton({
   text,
   icon,
@@ -30,7 +31,8 @@ export function GeneralSubmitButton({
       type="submit"
       variant={variant}
       disabled={pending}
-      className={width}
+      className={width }
+      
     >
       {pending ? (
         <>
@@ -40,7 +42,7 @@ export function GeneralSubmitButton({
       ) : (
         <>
           {icon && <div className="">{icon}</div>}
-          <span>{text}</span>
+          <span className="text-white cursor-pointer">{text}</span>
         </>
       )}
     </Button>
@@ -48,6 +50,7 @@ export function GeneralSubmitButton({
 }
 
 export function SaveJobButton({ savedJob }: { savedJob: boolean }) {
+
   const { pending } = useFormStatus();
   return (
     <Button
@@ -73,4 +76,5 @@ export function SaveJobButton({ savedJob }: { savedJob: boolean }) {
       )}
     </Button>
   );
+  
 }
