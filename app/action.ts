@@ -254,6 +254,11 @@ export async function updateJobPost(data:z.infer<typeof jobSchema>,jobId:string)
 
 export async function deleteJobPost(jobId:string){
   const user=await requireUser();
+  const req=await request();
+  const decision=await aj.protect(req);
+  if(decision.isDenied()){
+    throw new Error("only valid user  delete the post");
+  }
   if(!user){
     throw new Error("user not authenticated")
   }

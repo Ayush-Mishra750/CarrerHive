@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/public/logo.png";
 
-import { Menu } from "lucide-react";
+import { Briefcase, Menu } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -24,12 +24,27 @@ export async function Navbar() {
   return (
     <nav className="flex justify-between items-center py-5">
       <Link href="/" className="flex items-center gap-2">
-        <Image src={Logo} alt="Job Marshal Logo" width={40} height={40} />
+        <Briefcase className="w-6 h-6 text-primary-foreground" />
         <h1 className="text-2xl font-bold">
           Carrer<span className="text-primary">Hive</span>
         </h1>
       </Link>
-
+ <nav className="hidden md:flex items-center gap-8">
+       
+          <Link href="/" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              Home
+            </Link>
+            <Link href="/find-job" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              Find Jobs
+            </Link>
+            <Link href="/companies" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              Companies
+            </Link>
+            <Link href="/feature" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              Resources
+            </Link>
+           
+          </nav>
       {/* Desktop Navigation */}
       <div className="hidden md:flex items-center gap-5">
         <ThemeToggle />
