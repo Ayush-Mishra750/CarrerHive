@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import heroImage from '../../public/image.png';
 import Image from "next/image";
+import Link from "next/link";
 
 const jobSeekerFeatures = [
   {
@@ -66,10 +67,10 @@ const Features = () => {
             </p>
           </div>
 
-          <div className="bg-card rounded-2xl shadow-lg p-6 space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div className="bg-card rounded-2xl shadow-lg p-6 space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
+             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
                 <Input 
                   placeholder="Job title or keyword" 
                   className="pl-10 h-12 border-border"
@@ -82,18 +83,18 @@ const Features = () => {
                   className="pl-10 h-12 border-border"
                 />
               </div>
-              <div className="relative">
+              {/* <div className="relative">
                 <Briefcase className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
                 <Input 
                   placeholder="Experience level" 
                   className="pl-10 h-12 border-border"
                 />
-              </div>
+              </div> */}
             </div>
-            <Button  size="lg" className="w-full md:w-auto px-8 font-white bg-primary hover:bg-blend-lighten cursor-pointer">
+           <Link href="/find-job">    <Button  size="lg" className="w-full md:w-auto px-8 font-white bg-primary hover:bg-blend-lighten cursor-pointer">
               <Search className="mr-2 h-5 w-5" />
               Search Jobs
-            </Button>
+            </Button></Link>
           </div>
 
           <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">

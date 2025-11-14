@@ -38,16 +38,16 @@ interface Benefit {
 }
 
 export const benefits: Benefit[] = [
-  { id: "401k", label: "401(k)", icon: <Briefcase className="w-3 h-3" /> },
+  { id: "Competitive salary", label: "Competitive salary", icon: <Briefcase className="w-3 h-3" /> },
   {
-    id: "distributed",
-    label: "Distributed team",
+    id: "Meal allowance",
+    label: "Meal allowance",
     icon: <Users className="w-3 h-3" />,
   },
-  { id: "async", label: "Async", icon: <Zap className="w-3 h-3" /> },
+  { id: "Flexible work hours", label: "Flexible work hours", icon: <Zap className="w-3 h-3" /> },
   {
-    id: "vision",
-    label: "Vision insurance",
+    id: "Work-from-home support",
+    label: "Work-from-home support",
     icon: <Eye className="w-3 h-3" />,
   },
  
@@ -61,25 +61,25 @@ export const benefits: Benefit[] = [
     label: "Unlimited vacation",
     icon: <Umbrella className="w-3 h-3" />,
   },
-  { id: "pto", label: "Paid time off", icon: <Clock className="w-3 h-3" /> },
+  { id: "Health insurance (self + family)", label: "Health insurance (self + family)", icon: <Clock className="w-3 h-3" /> },
   {
     id: "four_day",
-    label: "4 day workweek",
+    label: "5 day workweek",
     icon: <Calendar className="w-3 h-3" />,
   },
   {
-    id: "401k_matching",
-    label: "401k matching",
+    id: "Gym membership",
+    label: "Gym membership",
     icon: <Coins className="w-3 h-3" />,
   },
   {
-    id: "company_retreats",
-    label: "Company retreats",
+    id: "Learning & development budget",
+    label: "Learning & development budgets",
     icon: <Building className="w-3 h-3" />,
   },
   {
-    id: "coworking_budget",
-    label: "Coworking budget",
+    id: "Flexible dress code",
+    label: "Flexible dress code",
     icon: <Building className="w-3 h-3" />,
   },
   {
@@ -87,31 +87,13 @@ export const benefits: Benefit[] = [
     label: "Learning budget",
     icon: <GraduationCap className="w-3 h-3" />,
   },
-  {
-    id: "gym",
-    label: "Free gym membership",
-    icon: <Dumbbell className="w-3 h-3" />,
-  },
+
   {
     id: "mental_wellness",
     label: "Mental wellness budget",
     icon: <Brain className="w-3 h-3" />,
   },
-  {
-    id: "home_office",
-    label: "Home office budget",
-    icon: <Home className="w-3 h-3" />,
-  },
-  {
-    id: "crypto",
-    label: "Pay in crypto",
-    icon: <Bitcoin className="w-3 h-3" />,
-  },
-  {
-  id: "learning_stipend",
-  label: "Learning & development budget",
-  icon: <GraduationCap className="w-3 h-3" />,
-},
+
 {
   id: "open_source",
   label: "Open source contribution time",
@@ -133,46 +115,33 @@ export const benefits: Benefit[] = [
   icon: <Monitor className="w-3 h-3" />, // import { Monitor } from "lucide-react"
 },
 {
-  id: "no_meetings",
-  label: "No unnecessary meetings",
+  id: "Provident Fund (PF)",
+  label: "Provident Fund (PF)",
   icon: <MicOff className="w-3 h-3" />, // import { MicOff } from "lucide-react"
 },
-{
-  id: "esops",
-  label: "Equity / ESOPs",
-  icon: <Coins className="w-3 h-3" />,
-},
+
 {
   id: "mental_health",
   label: "Mental health support",
   icon: <HeartPulse className="w-3 h-3" />, // import { HeartPulse } from "lucide-react"
 },
 {
-  id: "conference_support",
-  label: "Conference allowance",
+  id: "Retirement benefits",
+  label: "Retirement benefits",
   icon: <Presentation className="w-3 h-3" />, // import { Presentation } from "lucide-react"
 },
 {
-  id: "workation",
-  label: "Workation opportunities",
+  id: "Office gaming/recreation rooms",
+  label: "Office gaming/recreation rooms",
   icon: <Plane className="w-3 h-3" />, // import { Plane } from "lucide-react"
 },
 
-  {
-    id: "pseudonymous",
-    label: "Pseudonymous",
-    icon: <UserCircle className="w-3 h-3" />,
-  },
   {
     id: "profit_sharing",
     label: "Profit sharing",
     icon: <PieChart className="w-3 h-3" />,
   },
-  {
-    id: "equity",
-    label: "Equity compensation",
-    icon: <Coins className="w-3 h-3" />,
-  },
+
   {
     id: "no_whiteboard",
     label: "No whiteboard interview",

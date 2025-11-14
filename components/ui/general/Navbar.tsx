@@ -16,11 +16,34 @@ import { Button, buttonVariants } from "../button";
 import { UserDropdown } from "./userDropdown";
 import { ThemeToggle } from "./Theme-Toggle";
 import { auth } from "@/app/utils/auth";
+import { prisma } from "@/app/utils/db";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../dropdown-menu";
+
 
 
 
 export async function Navbar() {
   const session = await auth();
+const getUserData = async () => {
+  if (!session?.user?.id) {
+    return null; // handle case when session is missing
+  }
+
+  const data = await prisma.user.findUnique({
+    where: {
+      id: session.user.id,
+    },
+    select: {
+      userType: true,
+    },
+  });
+
+  return data;
+};
+const userData = await getUserData();
+const userType = userData?.userType;
+
+
   return (
     <nav className="flex justify-between items-center py-5 sticky w-full z-50 top-0 bg-background/70 backdrop-blur  px-4">
       <Link href="/" className="flex items-center gap-2">
@@ -29,29 +52,73 @@ export async function Navbar() {
           Carrer<span className="text-primary">Hive</span>
         </h1>
       </Link>
- <nav className="hidden md:flex items-center gap-8">
-       
-          <Link href="/" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-              Home
-            </Link>
-            <Link href="/find-job" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-              Find Jobs
-            </Link>
-            <Link href="/companies" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-              Companies
-            </Link>
-            <Link href="/feature" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-              AI Career Assistant
-            </Link>
-           
-          </nav>
+  {/* Desktop Navigation */}
+      <div className="hidden md:flex items-center gap-8">
+        <Link
+          href="/"
+          className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+        >
+          Home
+        </Link>
+        <Link
+          href="/find-job"
+          className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+        >
+          Find Jobs
+        </Link>
+        <Link
+          href="/companies"
+          className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+        >
+          Companies
+        </Link>
+      </div>
+
+      {/* Mobile Dropdown */}
+      <div className="md:hidden ml-2 ">
+        <DropdownMenu>
+          <DropdownMenuTrigger className="p-2 rounded-md border gap-2 hover:bg-muted/50 transition-colors">
+            <Menu className="h-5 w-5 " />
+          </DropdownMenuTrigger>
+
+          <DropdownMenuContent className="w-48 mr-4">
+            <DropdownMenuItem>
+              <Link href="/" className="w-full">
+                Home
+              </Link>
+            </DropdownMenuItem>
+
+            <DropdownMenuItem>
+              <Link href="/find-job" className="w-full">
+                Find Jobs
+              </Link>
+            </DropdownMenuItem>
+
+            <DropdownMenuItem>
+              <Link href="/companies" className="w-full">
+                Companies
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
       {/* Desktop Navigation */}
-      <div className="hidden md:flex items-center gap-5">
+      <div className="hidden md:flex items-center gap-5 ">
         <ThemeToggle />
         <Link href="/post-job" className={buttonVariants({ size: "lg" })}>
           Post Job
         </Link>
-        {session?.user ? (
+       
+       {/* { userType === "COMPANY" ? (
+  <Link href="/dashboard/recruiter" className={buttonVariants({ size: "lg",variant:"secondary" })}>
+    Recruiter Dashboard
+  </Link>
+) : (
+  <Link href="/dashboard/jobseeker" className={buttonVariants({ size: "lg",variant:"secondary" })}>
+    JobSeeker Dashboard
+  </Link>
+)} */}
+ {session?.user ? (
           <UserDropdown
             email={session.user.email as string}
             name={session.user.name as string}
@@ -68,7 +135,7 @@ export async function Navbar() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="md:hidden flex items-center gap-4">
+      <div className="md:hidden flex items-center ml-10">
         <ThemeToggle />
         {session?.user ? (
           <UserDropdown
@@ -86,7 +153,7 @@ export async function Navbar() {
             <SheetContent>
               <SheetHeader className="text-left">
                 <SheetTitle>
-                  Job<span className="text-primary">Marshal</span>
+                  Carrer<span className="text-primary">Hive</span>
                 </SheetTitle>
                 <SheetDescription>
                   Find or post your next job opportunity
@@ -120,111 +187,4 @@ export async function Navbar() {
     </nav>
   );
 }
-// "use client";
 
-// import Link from "next/link";
-// import { Briefcase, Bell, Menu, User } from "lucide-react";
-// import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-// import { Button, buttonVariants } from "@/components/ui/button";
-// import { ThemeToggle } from "./Theme-Toggle";
-// import { UserDropdown } from "./userDropdown";
-// import { auth } from "@/app/utils/auth";
-// // import { auth } from "@/app/utils/auth";
-
-// export async function Navbar() {
-//   const session = await auth();
-
-//   return (
-//     <nav className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-lg transition-colors">
-//       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-//         {/* Logo */}
-//         <Link href="/" className="flex items-center gap-2 font-bold text-xl">
-//           <Briefcase className="h-6 w-6 text-primary" />
-//           <span>CareerHub</span>
-//         </Link>
-
-//         {/* Desktop Links */}
-//         <div className="hidden md:flex items-center gap-8">
-//           <Link
-//             href="/find-job"
-//             className="text-sm font-medium hover:text-primary transition-colors"
-//           >
-//             Find Jobs
-//           </Link>
-//           <Link
-//             href="/companies"
-//             className="text-sm font-medium hover:text-primary transition-colors"
-//           >
-//             Companies
-//           </Link>
-//           <Link
-//             href="/career-assistant"
-//             className="text-sm font-medium text-primary hover:text-accent transition-colors"
-//           >
-//             AI Career Assistant
-//           </Link>
-//         </div>
-
-//         {/* Right Side */}
-//         <div className="flex items-center gap-3">
-//           <ThemeToggle />
-
-//           <Button variant="ghost" size="icon">
-//             <Bell className="h-5 w-5" />
-//           </Button>
-
-//           {session?.user ? (
-//             <UserDropdown
-//               email={session.user.email as string}
-//               name={session.user.name as string}
-//               image={session.user.image as string}
-//             />
-//           ) : (
-//             <Link
-//               href="/login"
-//               className={buttonVariants({ variant: "outline", size: "sm" })}
-//             >
-//               Login
-//             </Link>
-//           )}
-
-//           <Link
-//             href="/post-job"
-//             className={buttonVariants({
-//               variant: "default",
-//               size: "sm",
-//               className: "hidden sm:inline-flex",
-//             })}
-//           >
-//             Post a Job
-//           </Link>
-//         </div>
-
-//         {/* Mobile Menu */}
-//         <div className="md:hidden flex items-center gap-2">
-//           <Sheet>
-//             <SheetTrigger asChild>
-//               <Button variant="outline" size="icon">
-//                 <Menu className="h-5 w-5" />
-//               </Button>
-//             </SheetTrigger>
-//             <SheetContent side="right" className="p-6 space-y-4">
-//               <Link href="/" className="block text-lg font-medium">
-//                 Find Jobs
-//               </Link>
-//               <Link href="/companies" className="block text-lg font-medium">
-//                 Companies
-//               </Link>
-//               <Link href="/career-assistant" className="block text-lg font-medium">
-//                 Career Assistant
-//               </Link>
-//               <Link href="/post-job" className="block text-lg font-medium">
-//                 Post a Job
-//               </Link>
-//             </SheetContent>
-//           </Sheet>
-//         </div>
-//       </div>
-//     </nav>
-//   );
-// }

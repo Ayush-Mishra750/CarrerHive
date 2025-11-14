@@ -209,7 +209,7 @@ const JobPageId = async ({ params }: { params: Params }) => {
             {/* Apply Form */}
             <form className="flex flex-col items-center gap-3 mt-3 ">
               <input type="hidden" name="jobId" value={jobId} />
-              <GeneralSubmitButton text="Apply Now" />
+           <GeneralSubmitButton text="Apply Now" />
             </form>
           </div>
         </Card>

@@ -4,6 +4,7 @@ import { useFormStatus } from "react-dom";
 
 import { Heart, Loader2 } from "lucide-react";
 import { Button } from "../button";
+import { useState } from "react";
 
 
 
@@ -25,6 +26,7 @@ export function GeneralSubmitButton({
   width?: string;
 }) {
   const { pending } = useFormStatus();
+  // const [apply,isApply]=useState(false);
 
   return (
     <Button
@@ -32,6 +34,7 @@ export function GeneralSubmitButton({
       variant={variant}
       disabled={pending}
       className={width }
+   onClick={()=>alert("apply successfully")} 
       
     >
       {pending ? (
@@ -45,6 +48,7 @@ export function GeneralSubmitButton({
           <span className="text-white cursor-pointer">{text}</span>
         </>
       )}
+   
     </Button>
   );
 }
