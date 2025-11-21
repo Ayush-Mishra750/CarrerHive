@@ -13,6 +13,7 @@ import type { SVGProps } from "react";
 import { auth, signIn } from "@/app/utils/auth";
 import { GeneralSubmitButton } from "../general/SubmitButton";
 import { redirect } from "next/navigation";
+import { LoginSubmitButton } from "../general/LoginSubmitButton";
 
 const Github = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -82,7 +83,7 @@ export async function LoginForm() {
                   });
                 }}
               >
-                <GeneralSubmitButton
+                <LoginSubmitButton
                   text="Login with GitHub"
                   icon={<Github />}
                   variant="outline"
@@ -97,7 +98,7 @@ export async function LoginForm() {
                   });
                 }}
               >
-                <GeneralSubmitButton
+                <LoginSubmitButton
                   text="Login with Google"
                   icon={<Google />}
                   variant="outline"

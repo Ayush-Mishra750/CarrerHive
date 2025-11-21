@@ -19,15 +19,20 @@ export default async function FindJob({ searchParams }: SearchParamsProps) {
   const jobTypes = params.jobTypes?.split(",") || [];
   const location = params.location || "";
 
-  // Create a composite key from all filter parameters
   const filterKey = `page=${currentPage};types=${jobTypes.join(
     ","
   )};location=${location}`;
 
   return (
-    <div className="grid grid-cols-3 gap-8">
-      <JobFilters />
-      <div className="col-span-2 flex flex-col gap-6">
+    <div className="w-full flex flex-col lg:grid lg:grid-cols-3 gap-6 lg:gap-8 px-4 sm:px-6 lg:px-0">
+
+    
+      <div className="order-1 lg:order-1 lg:col-span-1">
+        <JobFilters />
+      </div>
+
+      {/* Job Listings */}
+      <div className="order-2 lg:order-2 lg:col-span-2 flex flex-col gap-6">
         <Suspense key={filterKey} fallback={<JobListingsLoading />}>
           <JobListings
             currentPage={currentPage}

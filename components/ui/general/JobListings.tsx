@@ -1,9 +1,10 @@
 import { prisma } from "@/app/utils/db";
 
 import { JobPostStatus } from "@prisma/client";
-import { JobCard } from "./jobCards";
+
 import { EmptyState } from "./EmptyState";
 import { PaginationComponent } from "./PaginationComponents";
+import { JobCard } from "./jobCards";
 
 async function getJobs(
   page: number = 1,

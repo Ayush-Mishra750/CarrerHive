@@ -2,9 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
 import { Label } from "@/components/ui/label";
-
 import { X } from "lucide-react";
 import {
   Select,
@@ -29,7 +27,6 @@ export function JobFilters() {
 
   const jobTypes = ["full-time", "part-time", "contract", "internship"];
 
-  // Get current filters from URL
   const currentJobTypes = searchParams.get("jobTypes")?.split(",") || [];
   const currentLocation = searchParams.get("location") || "";
   const currentMinSalary = searchParams.get("minSalary") || "";
@@ -38,13 +35,7 @@ export function JobFilters() {
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
-
-      if (value) {
-        params.set(name, value);
-      } else {
-        params.delete(name);
-      }
-
+      value ? params.set(name, value) : params.delete(name);
       return params.toString();
     },
     [searchParams]
@@ -52,41 +43,24 @@ export function JobFilters() {
 
   const handleJobTypeChange = (type: string, checked: boolean) => {
     const current = new Set(currentJobTypes);
-    if (checked) {
-      current.add(type);
-    } else {
-      current.delete(type);
-    }
-
+    checked ? current.add(type) : current.delete(type);
     const newValue = Array.from(current).join(",");
     router.push(`?${createQueryString("jobTypes", newValue)}`);
   };
 
-  const handleLocationChange = (location: string) => {
-    router.push(`?${createQueryString("location", location)}`);
-  };
-
-  const handleMinSalaryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    router.push(`?${createQueryString("minSalary", e.target.value)}`);
-  };
-
-  const handleMaxSalaryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    router.push(`?${createQueryString("maxSalary", e.target.value)}`);
-  };
-
-  const clearFilters = () => {
-    router.push("/");
-  };
+  const clearFilters = () => router.push("/");
 
   return (
-    <Card className="col-span-1 h-fit">
-      <CardHeader className="space-y-4">
+    <Card className="w-full h-fit bg-white dark:bg-neutral-900 shadow-md rounded-xl p-4 sm:p-6 lg:p-8">
+      <CardHeader className="space-y-4 p-0">
         <div className="flex justify-between items-center">
-          <CardTitle className="text-2xl font-semibold">Filter</CardTitle>
+          <CardTitle className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-800 dark:text-gray-100">
+            Filter
+          </CardTitle>
           <Button
             variant="destructive"
             size="sm"
-            className="h-8"
+            className="h-8  w-fit px-2 rounded-md flex items-center"
             onClick={clearFilters}
           >
             <span className="mr-2">Clear all</span>
@@ -95,22 +69,24 @@ export function JobFilters() {
         </div>
         <Separator />
       </CardHeader>
-      <CardContent className="space-y-6">
+
+      <CardContent className="space-y-6 p-0">
+        {/* Job Type */}
         <div className="space-y-4">
-          <Label className="text-lg font-semibold">Job Type</Label>
-          <div className="grid grid-cols-2 gap-4">
+          <Label className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-200">
+            Job Type
+          </Label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {jobTypes.map((type) => (
               <div key={type} className="flex items-center space-x-2">
                 <Checkbox
                   id={type.toLowerCase()}
                   checked={currentJobTypes.includes(type)}
-                  onCheckedChange={(checked) =>
-                    handleJobTypeChange(type, checked as boolean)
-                  }
+                  onCheckedChange={(checked) => handleJobTypeChange(type, checked as boolean)}
                 />
                 <Label
                   htmlFor={type.toLowerCase()}
-                  className="text-sm font-medium"
+                  className="text-sm font-medium text-gray-700 dark:text-gray-300"
                 >
                   {type}
                 </Label>
@@ -118,14 +94,22 @@ export function JobFilters() {
             ))}
           </div>
         </div>
+
         <Separator />
+
+        {/* Location */}
         <div className="space-y-4">
-          <Label className="text-lg font-semibold">Location</Label>
-          <Select value={currentLocation} onValueChange={handleLocationChange}>
-            <SelectTrigger>
+          <Label className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-200">
+            Location
+          </Label>
+          <Select
+            value={currentLocation}
+            onValueChange={(loc) => router.push(`?${createQueryString("location", loc)}`)}
+          >
+            <SelectTrigger className="bg-white dark:bg-neutral-800 border dark:border-neutral-700 text-gray-800 dark:text-gray-200">
               <SelectValue placeholder="Select Location" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="dark:bg-neutral-800 dark:text-gray-200 max-h-64 overflow-y-auto">
               <SelectGroup>
                 <SelectLabel>Worldwide</SelectLabel>
                 <SelectItem value="worldwide">
@@ -134,7 +118,7 @@ export function JobFilters() {
                 </SelectItem>
               </SelectGroup>
               <SelectGroup>
-                <SelectLabel>Location</SelectLabel>
+                <SelectLabel>Countries</SelectLabel>
                 {countryList.map((country) => (
                   <SelectItem value={country.name} key={country.name}>
                     <span>{country.flagEmoji}</span>
@@ -145,12 +129,17 @@ export function JobFilters() {
             </SelectContent>
           </Select>
         </div>
+
         <Separator />
+
+        {/* Salary Range */}
         <div className="space-y-4">
-          <Label className="text-lg font-semibold">Salary Range</Label>
-          <div className="grid grid-cols-2 gap-4">
+          <Label className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-200">
+            Salary Range
+          </Label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="minSalary" className="text-sm">
+              <Label htmlFor="minSalary" className="text-sm text-gray-700 dark:text-gray-300">
                 Min Salary
               </Label>
               <Input
@@ -158,12 +147,13 @@ export function JobFilters() {
                 type="number"
                 placeholder="0"
                 value={currentMinSalary}
-                onChange={handleMinSalaryChange}
-                className="w-full"
+                onChange={(e) => router.push(`?${createQueryString("minSalary", e.target.value)}`)}
+                className="w-full bg-white dark:bg-neutral-800 border dark:border-neutral-700 text-gray-800 dark:text-gray-200"
               />
             </div>
+
             <div className="space-y-2">
-              <Label htmlFor="maxSalary" className="text-sm">
+              <Label htmlFor="maxSalary" className="text-sm text-gray-700 dark:text-gray-300">
                 Max Salary
               </Label>
               <Input
@@ -171,8 +161,8 @@ export function JobFilters() {
                 type="number"
                 placeholder="500,000"
                 value={currentMaxSalary}
-                onChange={handleMaxSalaryChange}
-                className="w-full"
+                onChange={(e) => router.push(`?${createQueryString("maxSalary", e.target.value)}`)}
+                className="w-full bg-white dark:bg-neutral-800 border dark:border-neutral-700 text-gray-800 dark:text-gray-200"
               />
             </div>
           </div>
