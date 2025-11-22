@@ -93,16 +93,14 @@ export default function AboutSection() {
             </div>
             <div className="p-4 rounded-xl bg-neutral-100 dark:bg-neutral-800 shadow-sm hover:shadow-md transition-all text-center">
               <h3 className="text-3xl font-bold text-primary">50k+</h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">Job Seekers</p>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">Job Seekers </p>
             </div>
           </div>
         </div>
-
-        {/* Right Illustration */}
         <div className="flex-1 flex justify-center lg:justify-end">
           <Image
-          width={50}
-          height={50}
+          width={60}
+          height={60}
             src="https://illustrations.popsy.co/red/work-from-home.svg"
             alt="Job portal illustration"
             className="w-72 sm:w-96 lg:w-[420px] drop-shadow-lg dark:brightness-90 dark:contrast-125"
