@@ -64,7 +64,7 @@ const userType = userData?.userType;
           Find Jobs
         </Link>
         <Link
-          href="/about"
+          href="/contact"
           className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
         >
           About
@@ -92,7 +92,7 @@ const userType = userData?.userType;
             </DropdownMenuItem>
 
             <DropdownMenuItem>
-              <Link href="/about" className="w-full">
+              <Link href="/contact" className="w-full">
                 About
               </Link>
             </DropdownMenuItem>
