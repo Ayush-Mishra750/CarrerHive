@@ -4,7 +4,7 @@ import { auth } from "@/app/utils/auth";
 import { getFlagEmoji } from "@/app/utils/countryList";
 import { prisma } from "@/app/utils/db";
 import { benefits } from "@/app/utils/listOfBenefits";
-import { jobListingDurationPricing } from "@/app/utils/pricingTiers";
+// import { jobListingDurationPricing } from "@/app/utils/pricingTiers";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

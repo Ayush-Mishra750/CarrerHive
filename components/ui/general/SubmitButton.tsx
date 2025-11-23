@@ -11,7 +11,7 @@ import { useState } from "react";
 export function GeneralSubmitButton({
   text,
   icon,
-  variant,
+
   width = "w-full",
 }: {
   text: string;
