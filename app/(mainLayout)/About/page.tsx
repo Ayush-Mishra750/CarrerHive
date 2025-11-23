@@ -88,7 +88,8 @@ export default function AboutPage() {
           <Image
           width={50}
           height={50}
-             src="/mnt/data/90de8963-99e3-474f-9e18-caca67de13a9.png"
+        src="https://illustrations.popsy.co/red/team-goals.svg"
+
             alt="Mission"
             className="w-72 sm:w-96 lg:w-[380px] dark:brightness-90 dark:contrast-125"
           />
@@ -105,21 +106,20 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
-
-        {/* Stats Section */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <div className="p-6 rounded-2xl bg-neutral-100 dark:bg-neutral-800 shadow-sm text-center hover:shadow-lg transition-all">
             <h3 className="text-4xl font-extrabold text-primary">20k+</h3>
+
             <p className="text-gray-700 dark:text-gray-300 text-sm">Active Job Listings</p>
           </div>
 
           <div className="p-6 rounded-2xl bg-neutral-100 dark:bg-neutral-800 shadow-sm text-center hover:shadow-lg transition-all">
-            <h3 className="text-4xl font-extrabold text-primary">12k+</h3>
+            <h3 className="text-4xl font-extrabold text-primary">10k+</h3>
             <p className="text-gray-700 dark:text-gray-300 text-sm">Companies Hiring</p>
           </div>
 
           <div className="p-6 rounded-2xl bg-neutral-100 dark:bg-neutral-800 shadow-sm text-center hover:shadow-lg transition-all">
-            <h3 className="text-4xl font-extrabold text-primary">150k+</h3>
+            <h3 className="text-4xl font-extrabold text-primary">15k+</h3>
             <p className="text-gray-700 dark:text-gray-300 text-sm">Job Seekers</p>
           </div>
         </div>
@@ -151,7 +151,7 @@ export default function AboutPage() {
 
             <div className="p-6 rounded-2xl bg-neutral-100 dark:bg-neutral-800 shadow-sm hover:shadow-xl transition-all">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">
-                Trust
+                Trust and 
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
                 Building a reliable environment for companies & job seekers.
