@@ -88,6 +88,7 @@ export async function LoginForm() {
                   icon={<Github />}
                   variant="outline"
                   width="w-full"
+                  
                 />
               </form>
               <form

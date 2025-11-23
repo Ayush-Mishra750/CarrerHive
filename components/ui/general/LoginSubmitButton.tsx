@@ -45,7 +45,7 @@ export function LoginSubmitButton({
       ) : (
         <>
           {icon && <div className="">{icon}</div>}
-          <span className="text-white cursor-pointer">{text}</span>
+          <span className=" cursor-pointer">{text}</span>
         </>
       )}
    

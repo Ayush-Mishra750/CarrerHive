@@ -25,30 +25,42 @@ export function GeneralSubmitButton({
     | "link";
   width?: string;
 }) {
-  const { pending } = useFormStatus();
+  // const { pending } = useFormStatus();
   // const [apply,isApply]=useState(false);
+ const [applied, setApplied] = useState(false);
+  const [pending, setPending] = useState(false);
 
+  const handleApply = () => {
+    setPending(true);
+
+    setTimeout(() => {
+      setPending(false);
+      setApplied(true);
+      alert("Applied Successfully!");
+    }, 1200);
+  };
   return (
-    <Button
+     <Button
       type="submit"
-      variant={variant}
       disabled={pending}
-      className={width }
-   onClick={()=>alert("apply successfully")} 
-      
+      onClick={handleApply}
+      className={`${width} ${
+        applied ? "bg-green-600 hover:bg-green-700 text-white" : "text-primary"
+      }`}
     >
       {pending ? (
         <>
-          <Loader2 className="w-4 h-4 animate-spin " />
+          <Loader2 className="w-4 h-4 animate-spin" />
           <span>Submitting...</span>
         </>
       ) : (
         <>
-          {icon && <div className="">{icon}</div>}
-          <span className="text-white cursor-pointer">{text}</span>
+          {icon && <div>{icon}</div>}
+          <span className="cursor-pointer text-white">
+            {applied ? "Applied" : text}
+          </span>
         </>
       )}
-   
     </Button>
   );
 }
